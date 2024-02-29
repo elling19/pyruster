@@ -1,13 +1,15 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='pyruster',
-    version='0.1.2',
+    version='0.1.3',
     author='Elling',
     description='Implementing some syntax like rust.',
     long_description=open('README.rst').read(),
     license='MIT',
-    packages=find_packages(),
     install_requires=[
     ],
+    packages=["pyruster", ],
+    package_dir={"": "src"},
+    python_requires=">=3.6",
 )
