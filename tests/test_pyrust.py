@@ -3,6 +3,12 @@ import unittest
 from .context import Option, Result
 
 
+def create_some_result(v: int) -> Result[int, str]:
+    if v == 0:
+        return Result.err("v is zero.")
+    return Result.ok(v)
+
+
 class PyRustTest(unittest.TestCase):
 
     def setUp(self):
@@ -24,6 +30,10 @@ class PyRustTest(unittest.TestCase):
         result_err = Result("err", err_info)
         assert result_err.is_err()
         assert result_err.unwrap_err() == err_info
+        result_ok = create_some_result(v=2)
+        assert result_ok.unwrap() == 2
+        result_err = create_some_result(v=0)
+        assert result_err.is_err()
 
 
 if __name__ == "__main__":

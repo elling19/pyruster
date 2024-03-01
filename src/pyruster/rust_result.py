@@ -6,9 +6,17 @@ E = TypeVar('E')
 
 
 class Result(Generic[T, E]):
-    def __init__(self, value: T, error: Optional[E] = None):
-        self.value: T = value
+    def __init__(self, value: Optional[T] = None, error: Optional[E] = None):
+        self.value: Optional[T] = value
         self.error: Optional[E] = error
+
+    @staticmethod
+    def ok(value: T) -> 'Result[T, E]':
+        return Result(value=value)
+
+    @staticmethod
+    def err(error: E) -> 'Result[T, E]':
+        return Result(error=error)
 
     def is_ok(self) -> bool:
         return self.error is None
@@ -20,13 +28,13 @@ class Result(Generic[T, E]):
         if self.is_ok():
             return self.value
         else:
-            raise ValueError("Result is Err.")
+            raise ValueError(f"Result is Err: {str(self.error)}")
 
     def unwrap_err(self) -> E:
         if self.is_err():
             return self.error
         else:
-            raise ValueError("Result is Ok.")
+            raise ValueError(f"Result is Ok: {str(self.value)}")
 
     def map(self, func: Callable[[T], T]) -> 'Result[T, E]':
         if self.is_ok():

@@ -8,6 +8,14 @@ class Option(Generic[T]):
     def __init__(self, value: Optional[T]):
         self.value: Optional[T] = value
 
+    @staticmethod
+    def some(value: T) -> 'Option[T]':
+        return Option(value=value)
+
+    @staticmethod
+    def none() -> 'Option[T]':
+        return Option(value=None)
+
     def is_some(self) -> bool:
         return self.value is not None
 
