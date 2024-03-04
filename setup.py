@@ -2,10 +2,10 @@ from setuptools import setup
 
 setup(
     name='pyruster',
-    version='0.1.5',
+    version='0.1.6',
     author='Elling',
     description='Implementing some syntax like rust.',
-    long_description=open('README.MD').read(),
+    long_description=open('README.rst').read(),
     license='MIT',
     install_requires=[
     ],
