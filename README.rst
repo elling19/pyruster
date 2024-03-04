@@ -21,5 +21,5 @@ Installation
     pip install pyruster
 
 Usage
-----
-https://github.com/elling19/pyruster/blob/main/README.MD
+-----
+You can find detailed instructions in the `pyruster README <https://github.com/elling19/pyruster/blob/main/README.MD>`_.

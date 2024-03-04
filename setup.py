@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pyruster',
-    version='0.1.6',
+    version='0.1.7',
     author='Elling',
     description='Implementing some syntax like rust.',
     long_description=open('README.rst').read(),
