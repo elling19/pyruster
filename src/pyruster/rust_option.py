@@ -3,7 +3,6 @@ from typing import TypeVar, Generic, Optional, Callable, Tuple
 T = TypeVar('T')
 U = TypeVar('U')
 R = TypeVar('R')
-E = TypeVar('E')
 
 
 class Option(Generic[T]):
@@ -75,14 +74,14 @@ class Option(Generic[T]):
         else:
             default()
 
-    def ok_or(self, err: E):
+    def ok_or(self, err: str):
         from .rust_result import Result
         if self.is_some():
             return Result.Ok(self.__val)
         else:
             return Result.Err(err)
 
-    def ok_or_else(self, err: Callable[[], E]):
+    def ok_or_else(self, err: Callable[[], str]):
         from .rust_result import Result
         if self.is_some():
             return Result.Ok(self.__val)
