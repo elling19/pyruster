@@ -3,7 +3,7 @@ import unittest
 from src.pyruster import Result, Option
 
 
-def create_some_result(v: int) -> Result[int, str]:
+def create_some_result(v: int) -> Result[int]:
     if v == 0:
         return Result.Err("v is zero.")
     return Result.Ok(v)
@@ -16,7 +16,7 @@ class PyRustTest(unittest.TestCase):
 
     @staticmethod
     def test_option():
-        option_none = Option(None)
+        option_none = Option.None_()
         assert option_none.is_none()
         option_some = Option("some")
         assert option_some.is_some()

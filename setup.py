@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pyruster',
-    version='0.1.9',
+    version='0.1.10',
     author='Elling',
     description='Implementing some syntax like rust.',
     long_description=open('README.rst').read(),
@@ -11,5 +11,6 @@ setup(
     ],
     packages=["pyruster", ],
     package_dir={"": "src"},
+    package_data={"pyruster": ["py.typed", "*.pyi"]},
     python_requires=">=3.6",
 )
