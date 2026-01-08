@@ -16,7 +16,7 @@ class Option(Generic[T]):
         return Option(val=val)
 
     @staticmethod
-    def None_() -> "Option[None]":
+    def None_() -> "Option[Any]":
         return Option(val=None)
 
     def is_some(self) -> bool:
@@ -75,19 +75,19 @@ class Option(Generic[T]):
         else:
             return default()
 
-    def ok_or(self, err: str):
+    def ok_or(self, err: U):  # type: ignore
         from .rust_result import Result
         if self.is_some():
-            return Result.Ok(cast(T, self.__val))
+            return Result[T, U](val=cast(T, self.__val))
         else:
-            return Result.Err(err)
+            return Result[T, U](err=err)
 
-    def ok_or_else(self, err: Callable[[], str]):
+    def ok_or_else(self, err: Callable[[], U]):
         from .rust_result import Result
         if self.is_some():
-            return Result.Ok(cast(T, self.__val))
+            return Result[T, U](val=cast(T, self.__val))
         else:
-            return Result.Err(err())
+            return Result[T, U](err=err())
 
     def and_(self, optb: 'Option[U]') -> 'Option[U]':
         if self.is_some():
