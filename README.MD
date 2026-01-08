@@ -60,7 +60,7 @@ Implementing some syntax like rust:
 
 # Usage
 ```python
-from src.pyruster import Result, Option
+from pyruster import Result, Option
 result_ok = Result.Ok("ok")
 option_some = Option.Some("some")
 ```
