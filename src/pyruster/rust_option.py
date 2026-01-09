@@ -1,5 +1,6 @@
 from typing import TypeVar, Generic, Optional, Callable, Tuple, Any, cast
 
+E = TypeVar('E')
 T = TypeVar('T')
 U = TypeVar('U')
 R = TypeVar('R')
@@ -75,19 +76,19 @@ class Option(Generic[T]):
         else:
             return default()
 
-    def ok_or(self, err: U):  # type: ignore
+    def ok_or(self, err: E):  # type: ignore
         from .rust_result import Result
         if self.is_some():
-            return Result[T, U](val=cast(T, self.__val))
+            return Result[T, E](val=cast(T, self.__val))
         else:
-            return Result[T, U](err=err)
+            return Result[T, E](err=err)
 
-    def ok_or_else(self, err: Callable[[], U]):
+    def ok_or_else(self, err: Callable[[], E]):
         from .rust_result import Result
         if self.is_some():
-            return Result[T, U](val=cast(T, self.__val))
+            return Result[T, E](val=cast(T, self.__val))
         else:
-            return Result[T, U](err=err())
+            return Result[T, E](err=err())
 
     def and_(self, optb: 'Option[U]') -> 'Option[U]':
         if self.is_some():
